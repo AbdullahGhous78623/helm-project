@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+spec:
+  replicas: {{ .Values.userprofile.replicas }}
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+      - name: usernode-js
+        image: "{{ .Values.userprofile.image }}"
+        ports:
+        - containerPort: {{ .Values.userprofile.port }}
+        env:
+        - name: MONGODB_URI
+          value: "mongodb://{{ .Values.mongodb.username }}:{{ .Values.mongodb.password }}@mongodb:{{ .Values.mongodb.port }}/{{ .Values.mongodb.database }}?authSource=admin"
+        - name: SESSION_SECRET
+          value: "{{ .Values.userprofile.sessionSecret }}"
+        - name: EMAIL_USER
+          value: "{{ .Values.userprofile.emailUser }}"
+        - name: EMAIL_PASS
+          value: "{{ .Values.userprofile.emailPass }}"
+        - name: PORT
+          value: "{{ .Values.userprofile.port }}"
+

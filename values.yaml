@@ -1,0 +1,14 @@
+mongodb:
+  database: myDatabase
+  username: myuser
+  password: mypassword
+  port: 27017
+
+userprofile:
+  image: "saiteja2502/userprofileretail:latest"
+  replicas: 2
+  port: 3130
+  sessionSecret: "1234"
+  emailUser: "chagantyteja2502@gmail.com"
+  emailPass: "yxoq bjuk rdnt alzp"
+
