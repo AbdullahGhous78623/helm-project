@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: usernode-js-service
+  name: {{ .Values.userprofile.name }}
+  namespace: {{ .Values.namespace }}
 spec:
-  type: LoadBalancer
+  selector:
+    app: {{ .Values.userprofile.labels.app }}
   ports:
     - port: {{ .Values.userprofile.port }}
       targetPort: {{ .Values.userprofile.port }}
       protocol: TCP
-  selector:
-    app: userprofile
+  type: {{ .Values.cluster_ip }}
 

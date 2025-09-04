@@ -1,14 +1,24 @@
+namespace: abdullah
+
 mongodb:
+  name: mongodb
   database: myDatabase
   username: myuser
   password: mypassword
   port: 27017
+  image: mongo:latest
+  replicas: 1
+  labels:
+    app: mongodb
 
 userprofile:
+  name: userprofile
   image: "saiteja2502/userprofileretail:latest"
   replicas: 2
   port: 3130
   sessionSecret: "1234"
   emailUser: "chagantyteja2502@gmail.com"
   emailPass: "yxoq bjuk rdnt alzp"
+  labels:
+    app: userprofile
 
