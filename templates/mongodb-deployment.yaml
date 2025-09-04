@@ -14,7 +14,7 @@ spec:
         app: {{ .Values.mongodb.labels.app }}
     spec:
       containers:
-      - name: {{ .Values.mongodb.name }}
+      - name: {{ .Values.mongodb.containerName }}
         image: {{ .Values.mongodb.image }}
         ports:
         - containerPort: {{ .Values.mongodb.port }}
@@ -24,11 +24,11 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.mongodb.name }}-secret
-              key: mongo-user
+              name: {{ .Values.mongodb.service.name }}-secret
+              key: {{ .Values.mongodb.secretKeys.userKey }}
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.mongodb.name }}-secret
-              key: mongo-password
+              name: {{ .Values.mongodb.service.name }}-secret
+              key: {{ .Values.mongodb.secretKeys.passwordKey }}
 

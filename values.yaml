@@ -8,17 +8,28 @@ mongodb:
   port: 27017
   image: mongo:latest
   replicas: 1
+  containerName: mongodb
   labels:
     app: mongodb
+  secretKeys:
+    userKey: mongo-user
+    passwordKey: mongo-password
+  service:
+    type: ClusterIP
+    name: mongodb
 
 userprofile:
   name: userprofile
   image: "saiteja2502/userprofileretail:latest"
   replicas: 2
   port: 3130
+  containerName: usernode-js
   sessionSecret: "1234"
   emailUser: "chagantyteja2502@gmail.com"
   emailPass: "yxoq bjuk rdnt alzp"
   labels:
     app: userprofile
+  service:
+    type: ClusterIP
+    name: userprofile
 
